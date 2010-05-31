@@ -13,3 +13,12 @@ get '/' do
     haml :index
   end
 end
+
+get '/json' do
+  address = params[:address]
+  if address
+    @db = Geocoder::US::Database.new('geocoder.db')
+    @result = @db.geocode(params[:address])
+    @result.to_json
+  end
+end

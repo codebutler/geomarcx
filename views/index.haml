@@ -1,29 +1,49 @@
-%script{ :src => "http://maps.google.com/maps/api/js?sensor=false", :type => "text/javascript" }
-:javascript
-  function initialize(result) {
-    var myLatlng = new google.maps.LatLng(result.lat, result.lon);
-    var myOptions = {
-      zoom: 18,
-      center: myLatlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-    var marker = new google.maps.Marker({
-        position: myLatlng, 
-        map: map
-    });
-  }
+!!!
+%html
+  %head
+    %title geo.mar.cx address geocoder
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/stylesheets/blueprint/screen.css', :media => 'screen' }
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/stylesheets/screen.css', :media => 'screen' }
+    %script{ :src => "http://maps.google.com/maps/api/js?sensor=false", :type => "text/javascript" }
+    :javascript
+      function initialize(result) {
+        var myLatlng = new google.maps.LatLng(result.lat, result.lon);
+        var myOptions = {
+          zoom: 18,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng, 
+            map: map
+        });
+      }
+  %body
+    %h1 geo.mar.cx address geocoder
+    %form
+      %label Address:
+      %input{ :type => 'text', :name => 'address', :value => params[:address], :style => 'width: 400px' }
+      %input{ :type => 'submit', :value => 'Search' }
 
-%form
-  %label Address:
-  %input{ :type => 'text', :name => 'address', :value => params[:address], :style => 'width: 400px' }
-  %input{ :type => 'submit' }
-
-- if @result
-  %hr/
-  #map_canvas{ :style => 'width: 600px; height: 400px' }
-  %script{ :type => 'text/javascript' }
-    = "var result = #{@result[0].to_json};"
-    initialize(result);
-  %pre
-    = @result.to_yaml
+    - if @result
+      %hr/
+      #results.container
+        #map_canvas.span-18
+        :javascript
+          var result = #{@result[0].to_json};
+          initialize(result);
+        #info.span-5.last
+          %table
+            - @result[0].each do |k, v|
+              %tr
+                %th= k
+                %td= v
+    %hr/
+    #footer 
+      #about
+        Powered by the 
+        %a{ :href => 'http://github.com/geocommons/geocoder' } geocommons geocoder
+        library.
+      #contact
+        %a{ :href => 'http://codebutler.com' } codebutler.com

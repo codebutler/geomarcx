@@ -1,0 +1,57 @@
+body {
+  font-family: sans-serif;
+  padding: 16px;
+}
+
+h1 {
+  margin: 0;
+  padding-bottom: 0.25em;
+}
+
+label, input[type='text'] {
+  padding: 6px;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+#map_canvas {
+  height: 400px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #bbb;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+#info th, #info td {
+  border: 1px solid #bbb;
+  text-align: left;
+  padding: 6px;
+}
+
+hr {
+  height: 1px;
+  border: 0;
+  background: #bbb;
+  margin: 16px 0;
+  clear: both;
+}
+
+#footer {
+  font-size: 10px;
+}
+
+#footer a {
+  color: inherit
+}
+
+#footer #about {
+  float: left;
+}
+
+#footer #contact {
+  text-align: right;
+  float: right;
+}

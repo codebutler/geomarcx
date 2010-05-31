@@ -8,7 +8,7 @@ set :root,        root_dir
 set :app_file,    File.join(root_dir, 'geomarcx_coder.rb')
 disable :run
 
-log = File.new("/var/log/apache2/sinatra.log", "a")
+log = File.new("/var/www/geo.mar.cx/log/sinatra.log", "a")
 STDOUT.reopen(log)
 STDERR.reopen(log)
 
