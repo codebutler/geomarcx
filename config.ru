@@ -1,5 +1,8 @@
 require 'rubygems'
-require 'sinatra'
+require 'bundler'
+
+Bundler.require
+#require 'sinatra'
 
 root_dir = File.dirname(__FILE__)
 
@@ -12,7 +15,7 @@ log = File.new("/var/www/geo.mar.cx/log/sinatra.log", "a")
 STDOUT.reopen(log)
 STDERR.reopen(log)
 
-require 'geomarcx_coder'
+require './geomarcx_coder'
 
 run Sinatra::Application
 
